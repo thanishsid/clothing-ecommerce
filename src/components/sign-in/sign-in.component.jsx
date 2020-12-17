@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import { motion } from 'framer-motion';
 import CustomButton from '../custom-button/custom-button.component';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 import { Link } from 'react-router-dom';
 import { pageVariants, pageTransition } from '../../animation/animations';
 import './sign-in.styles.scss';
@@ -13,10 +13,17 @@ const SignIn = () => {
     password: '',
   });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setData({ ...data, email: '', password: '' });
+    const { email, password } = data;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setData({ ...data, email: '', password: '' });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = (event) => {
