@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
+import { motion } from 'framer-motion';
 import CustomButton from '../custom-button/custom-button.component';
 import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { Link } from 'react-router-dom';
+import { pageVariants, pageTransition } from '../../animation/animations';
 import './sign-in.styles.scss';
 
 const SignIn = () => {
@@ -23,10 +26,17 @@ const SignIn = () => {
   };
 
   return (
-    <div className='sign-in'>
+    <motion.div
+      initial='out'
+      animate='in'
+      exit='out'
+      variants={pageVariants.squeezeIn}
+      transition={pageTransition.opt1}
+      className='sign-in'
+    >
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
-      <form onSubmit={handleSubmit}>
+      <form className='frm' onSubmit={handleSubmit}>
         <FormInput
           type='email'
           name='email'
@@ -48,7 +58,10 @@ const SignIn = () => {
           Sign In with Google
         </CustomButton>
       </form>
-    </div>
+      <Link className='select' to='/signup'>
+        Don't have an an account? Click here to register.
+      </Link>
+    </motion.div>
   );
 };
 

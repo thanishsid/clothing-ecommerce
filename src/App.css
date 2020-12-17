@@ -11,3 +11,21 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.select {
+  margin: 2em auto;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.select:hover {
+  transform: scale(1.03);
+  color: rgb(62, 100, 143);
+}
+
+.hideOverflow {
+  overflow: hidden;
+}
