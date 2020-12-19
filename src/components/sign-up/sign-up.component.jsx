@@ -3,7 +3,7 @@ import FormInput from '../form-input/form-input.component';
 import { motion } from 'framer-motion';
 import CustomButton from '../custom-button/custom-button.component';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { pageVariants, pageTransition } from '../../animation/animations';
 import './sign-up.styles.scss';
 
@@ -52,11 +52,11 @@ const SignUp = () => {
 
   return (
     <motion.div
-      initial='out'
+      initial='initial'
       animate='in'
       exit='out'
-      variants={pageVariants.flipY}
-      transition={pageTransition.opt2}
+      variants={pageVariants.fadeIn}
+      transition={pageTransition.opt1}
       className='sign-up'
     >
       <h2 className='title'>Don't have an account?</h2>
@@ -99,9 +99,9 @@ const SignUp = () => {
         />
         <CustomButton type='submit'>Sign Up</CustomButton>
       </form>
-      <Link className='select' to='/signin'>
+      <NavLink className='select' to='/signin'>
         Have an an account already? Click here to Sign in.
-      </Link>
+      </NavLink>
     </motion.div>
   );
 };

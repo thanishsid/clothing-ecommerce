@@ -38,7 +38,7 @@ const SignIn = () => {
       animate='in'
       exit='out'
       variants={pageVariants.squeezeIn}
-      transition={pageTransition.opt1}
+      transition={pageTransition.opt2}
       className='sign-in'
     >
       <h2>Already have an account?</h2>

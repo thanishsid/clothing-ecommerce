@@ -7,7 +7,7 @@ import './homepage.styles.scss';
 const HomePage = () => {
   return (
     <motion.div
-      initial='out'
+      initial='initial'
       animate='in'
       exit='out'
       variants={pageVariants.fadeIn}

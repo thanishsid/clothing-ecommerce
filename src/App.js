@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCurrentUser } from './redux/user/user.actions';
+import { AnimatePresence, motion } from 'framer-motion';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import SignIn from './components/sign-in/sign-in.component';
@@ -10,7 +12,14 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import './App.css';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const location = useLocation();
+  const homeRedir = (
+    <motion.Fragment exit='undefined'>
+      <Redirect to='/' />
+    </motion.Fragment>
+  );
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (userAuth) => {
@@ -18,15 +27,15 @@ function App() {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot((snapShot) => {
-          setUser({
-            currentUser: {
+          dispatch(
+            setCurrentUser({
               id: snapShot.id,
               ...snapShot.data(),
-            },
-          });
+            })
+          );
         });
       } else {
-        setUser(userAuth);
+        dispatch(setCurrentUser(userAuth));
       }
     });
 
@@ -35,13 +44,21 @@ function App() {
 
   return (
     <div className='hideOverflow'>
-      <Header currentUser={user} />
+      <Header />
       <AnimatePresence exitBeforeEnter>
-        <Switch>
+        <Switch location={location} key={location.pathname}>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/shop' component={ShopPage} />
-          <Route exact path='/signin' component={SignIn} />
-          <Route exact path='/signup' component={SignUp} />
+          <Route
+            exact
+            path='/signin'
+            render={() => (currentUser ? homeRedir : <SignIn />)}
+          />
+          <Route
+            exact
+            path='/signup'
+            render={() => (currentUser ? homeRedir : <SignUp />)}
+          />
         </Switch>
       </AnimatePresence>
     </div>
