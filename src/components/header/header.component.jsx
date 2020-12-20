@@ -4,10 +4,14 @@ import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { auth } from '../../firebase/firebase.utils';
+import CartIcon from '../../components/cart-icon/cart-icon.component';
+import CartDropDown from '../cart-dropdown/cart-dropdown.component';
+
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 const Header = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
+  const cartDropdownState = useSelector((state) => state.cart.hidden);
 
   return (
     <div className='header'>
@@ -20,7 +24,7 @@ const Header = () => {
             transition: { duration: 1 },
           }}
         >
-          <Logo />
+          <Logo className='main-logo' />
         </motion.div>
       </NavLink>
 
@@ -40,7 +44,9 @@ const Header = () => {
             SIGN IN
           </NavLink>
         )}
+        <CartIcon />
       </div>
+      {!cartDropdownState && <CartDropDown />}
     </div>
   );
 };
