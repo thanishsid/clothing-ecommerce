@@ -14,6 +14,7 @@
 
   .main-logo {
     filter: sepia(1);
+    transform: scale(1.2);
   }
 
   .options {
@@ -23,6 +24,7 @@
     align-items: center;
     justify-content: flex-end;
     padding-right: 1em;
+    font-size: larger;
 
     .option {
       margin: 0em 1em;
