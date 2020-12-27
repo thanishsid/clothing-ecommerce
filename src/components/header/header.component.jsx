@@ -6,12 +6,14 @@ import { useSelector } from 'react-redux';
 import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropDown from '../cart-dropdown/cart-dropdown.component';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selector';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 const Header = () => {
-  const currentUser = useSelector((state) => state.user.currentUser);
-  const cartDropdownState = useSelector((state) => state.cart.hidden);
+  const currentUser = useSelector(selectCurrentUser);
+  const cartDropdownState = useSelector(selectCartHidden);
 
   return (
     <div className='header'>
