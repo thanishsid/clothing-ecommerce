@@ -21,6 +21,11 @@
     box-shadow: 0px 0px 4px black;
     padding: 0.8em;
     border-radius: 0.5em;
+
+    .empty-message {
+      margin: 60% auto;
+      font-size: larger;
+    }
   }
 
   button {
