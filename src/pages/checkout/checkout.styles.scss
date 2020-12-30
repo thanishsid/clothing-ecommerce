@@ -6,12 +6,20 @@
   align-items: center;
   margin: 50px auto 0;
 
+  @media (max-width: 900px) {
+    width: 70%;
+  }
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+
   .checkout-header {
     width: 100%;
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid darkgrey;
+    text-align: center;
 
     .header-block {
       text-transform: capitalize;
