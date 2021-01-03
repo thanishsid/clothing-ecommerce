@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import SHOP_DATA from './shop.data';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectShopCollections } from '../../redux/shop/shop.selectors';
 import CollectionPreview from '../../components/collection-preview/collection-preview.component';
 import { motion } from 'framer-motion';
 import { pageVariants, pageTransition } from '../../animation/animations';
 
 const ShopPage = () => {
-  const [collections] = useState(SHOP_DATA);
+  const collections = useSelector(selectShopCollections);
 
   return (
     <motion.div
