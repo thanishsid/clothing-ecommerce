@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentUser } from './redux/user/user.selector';
 import { setCurrentUser } from './redux/user/user.actions';
-import { AnimatePresence } from 'framer-motion';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import SignIn from './components/sign-in/sign-in.component';
@@ -13,8 +13,8 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import './App.css';
 
 function App() {
+  const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.user.currentUser);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (userAuth) => {
@@ -34,29 +34,27 @@ function App() {
       }
     });
 
-    return unsubscribe;
+    return () => unsubscribe();
   }, [dispatch]);
 
   return (
     <div className='hideOverflow'>
       <Header />
-      <AnimatePresence exitBeforeEnter>
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route exact path='/shop' component={ShopPage} />
-          <Route exact path='/checkout' component={CheckoutPage} />
-          <Route
-            exact
-            path='/signin'
-            render={() => (currentUser ? <Redirect to='/' /> : <SignIn />)}
-          />
-          <Route
-            exact
-            path='/signup'
-            render={() => (currentUser ? <Redirect to='/' /> : <SignUp />)}
-          />
-        </Switch>
-      </AnimatePresence>
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/shop' component={ShopPage} />
+        <Route exact path='/checkout' component={CheckoutPage} />
+        <Route
+          exact
+          path='/signin'
+          render={() => (currentUser ? <Redirect to='/' /> : <SignIn />)}
+        />
+        <Route
+          exact
+          path='/signup'
+          render={() => (currentUser ? <Redirect to='/' /> : <SignUp />)}
+        />
+      </Switch>
     </div>
   );
 }

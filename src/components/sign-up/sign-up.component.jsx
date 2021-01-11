@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
-import { motion } from 'framer-motion';
 import CustomButton from '../custom-button/custom-button.component';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import { NavLink } from 'react-router-dom';
-import { pageVariants, pageTransition } from '../../animation/animations';
 import './sign-up.styles.scss';
 
 const SignUp = () => {
@@ -51,14 +49,7 @@ const SignUp = () => {
   };
 
   return (
-    <motion.div
-      initial='initial'
-      animate='in'
-      exit='out'
-      variants={pageVariants.fadeIn}
-      transition={pageTransition.opt1}
-      className='sign-up'
-    >
+    <div className='sign-up'>
       <h2 className='title'>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form className='frm' onSubmit={handleSubmit}>
@@ -102,7 +93,7 @@ const SignUp = () => {
       <NavLink className='select' to='/signin'>
         Have an an account already? Click here to Sign in.
       </NavLink>
-    </motion.div>
+    </div>
   );
 };
 
