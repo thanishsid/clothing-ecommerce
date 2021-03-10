@@ -60,3 +60,29 @@
     }
   }
 }
+
+@media only screen and (max-width: 800px) {
+  .collection-item {
+    width: 20vw;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .collection-item {
+    width: 30vw;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .collection-item {
+    width: 60vw;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .collection-item {
+    width: 80vw;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .collection-item {
+    width: 95vw;
+  }
+}

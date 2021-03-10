@@ -14,7 +14,7 @@
   }
 
   .checkout-header {
-    width: 100%;
+    width: 80%;
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
@@ -35,5 +35,12 @@
     margin-top: 30px;
     margin-left: auto;
     font-size: 36px;
+    margin-right: 1em;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .checkout-header {
+      width: 90%;
+    }
   }
 }

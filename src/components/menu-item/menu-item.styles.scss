@@ -29,8 +29,14 @@
     }
   }
 
-  &.large {
-    height: 380px;
+  // &.large {
+  //   height: 380px;
+  // }
+
+  @media only screen and (min-width: 600px) {
+    &.large {
+      height: 380px;
+    }
   }
 
   &:first-child {
